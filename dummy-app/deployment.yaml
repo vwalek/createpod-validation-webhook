@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dummy
+  name: dummy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy
+  template:
+    metadata:
+      labels:
+        app: dummy
+    spec:
+      containers:
+      - command:
+        - tail
+        - -f
+        - /dev/null
+        image: registry.redhat.io/rhel8/support-tools
+        imagePullPolicy: Always
+        name: support-tools

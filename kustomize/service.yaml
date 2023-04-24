@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: createpod-tls-secret
+  labels:
+    app: createpod-webhook
+  name: createpod-webhook
+  namespace: createpod-validation-webhook
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 8443
+  type: ClusterIP
+

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: createpod-webhook
+  name: createpod-webhook
+  namespace: createpod-validation-webhook
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: createpod-webhook
+  template:
+    metadata:
+      labels:
+        app: createpod-webhook
+    spec:
+      containers:
+      - image: quay.io/vwalek/createpod-validation-webhook
+        imagePullPolicy: Always
+        name: createpod-validation-webhook
+        volumeMounts:
+        - mountPath: /ssl
+          name: tls-secret
+      securityContext: {}
+      volumes:
+      - name: tls-secret
+        secret:
+          defaultMode: 420
+          secretName: createpod-tls-secret
