@@ -22,3 +22,5 @@ spec:
         image: registry.redhat.io/rhel8/support-tools
         imagePullPolicy: Always
         name: support-tools
+      serviceAccount: test
+      serviceAccountName: test
